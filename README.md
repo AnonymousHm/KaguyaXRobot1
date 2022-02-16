@@ -61,25 +61,6 @@ Special Thanks To [TheHamkerCat](https://t.me/TheHamkerCat)
 </h1>
 
 
-<h1 align="center"> 
-   ⇝ Docker ⇜
-</h1>
-
-```console
-thehamkercat@arch:~$ git clone https://github.com/thehamkercat/WilliamButcherBot
-thehamkercat@arch:~$ cd WilliamButcherBot
-thehamkercat@arch:~$ cp sample_config.env config.env
-```
-
-<h3 align="center"> 
-    Edit <b> config.env </b> with your own values
-</h3>
-
-```console
-thehamkercat@arch:~$ sudo docker build . -t wbb
-thehamkercat@arch:~$ sudo docker run wbb
-```
-
 <h2 align="center"> 
    ⇝ Write new modules ⇜
 </h2>
@@ -94,7 +75,7 @@ from pyrogram import filters # pyrogram filters
 
 
 # For /help menu
-__MODULE__ = "Module Name"
+__MODULE__ = "Module Ne"
 __HELP__ = "Module help message"
 
 
