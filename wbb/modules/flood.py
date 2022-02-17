@@ -40,7 +40,7 @@ __MODULE__ = "Flood"
 __HELP__ = """
 Anti-Flood system, the one who sends more than 10 messages in a row, gets muted for an hour (Except for admins).
 
-/flood [ENABLE|DISABLE] - Turn flood detection on or off
+/flood Enable|Disable - Turn flood detection on or off
 """
 
 
@@ -113,7 +113,7 @@ async def flood_control_func(_, message: Message):
             ]
         )
         m = await message.reply_text(
-            f"Imagine flooding the chat in front of me, Muted {mention} for an hour!",
+            f"Okay Nibba Quiet Now 🤫, Muted {mention} for an hour!",
             reply_markup=keyboard,
         )
 
@@ -136,8 +136,7 @@ async def flood_callback_func(_, cq: CallbackQuery):
     permission = "can_restrict_members"
     if permission not in permissions:
         return await cq.answer(
-            "You don't have enough permissions to perform this action.\n"
-            + f"Permission needed: {permission}",
+            "You don't have enough permissions to perform this action.",
             show_alert=True,
         )
     user_id = cq.data.split("_")[1]
@@ -152,7 +151,7 @@ async def flood_callback_func(_, cq: CallbackQuery):
 @adminsOnly("can_change_info")
 async def flood_toggle(_, message: Message):
     if len(message.command) != 2:
-        return await message.reply_text("Usage: /flood [ENABLE|DISABLE]")
+        return await message.reply_text("Usage: /flood Enable|Disable")
     status = message.text.split(None, 1)[1].strip()
     status = status.lower()
     chat_id = message.chat.id
@@ -163,4 +162,4 @@ async def flood_toggle(_, message: Message):
         await flood_off(chat_id)
         await message.reply_text("Disabled Flood Checker.")
     else:
-        await message.reply_text("Unknown Suffix, Use /flood [ENABLE|DISABLE]")
+        await message.reply_text("Unknown Suffix, Use /flood Enable|Disable")

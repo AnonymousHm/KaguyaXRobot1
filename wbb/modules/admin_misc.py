@@ -30,17 +30,17 @@ from wbb.core.decorators.permissions import adminsOnly
 
 __MODULE__ = "Admin Miscs"
 __HELP__ = """
-/set_chat_title - Change The Name Of A Group/Channel.
-/set_chat_photo - Change The PFP Of A Group/Channel.
-/set_user_title - Change The Administrator Title Of An Admin.
+/setctitle - Change The Name Of A Group/Channel.
+/setcphoto - Change The PFP Of A Group/Channel.
+/setusertitle - Change The Administrator Title Of An Admin.
 """
 
 
-@app.on_message(filters.command("set_chat_title") & ~filters.private)
+@app.on_message(filters.command("setctitle") & ~filters.private)
 @adminsOnly("can_change_info")
-async def set_chat_title(_, message):
+async def setctitle(_, message):
     if len(message.command) < 2:
-        return await message.reply_text("**Usage:**\n/set_chat_title NEW NAME")
+        return await message.reply_text("**Usage:**\n/setctitle NEW NAME")
     old_title = message.chat.title
     new_title = message.text.split(None, 1)[1]
     await message.chat.set_title(new_title)
@@ -49,9 +49,9 @@ async def set_chat_title(_, message):
     )
 
 
-@app.on_message(filters.command("set_user_title") & ~filters.private)
+@app.on_message(filters.command("setcphoto") & ~filters.private)
 @adminsOnly("can_change_info")
-async def set_user_title(_, message):
+async def setusertitle(_, message):
     if not message.reply_to_message:
         return await message.reply_text(
             "Reply to user's message to set his admin title"
@@ -64,7 +64,7 @@ async def set_user_title(_, message):
     from_user = message.reply_to_message.from_user
     if len(message.command) < 2:
         return await message.reply_text(
-            "**Usage:**\n/set_user_title NEW ADMINISTRATOR TITLE"
+            "**Usage:**\n/setusertitle NEW ADMINISTRATOR TITLE"
         )
     title = message.text.split(None, 1)[1]
     await app.set_administrator_title(chat_id, from_user.id, title)
@@ -73,9 +73,9 @@ async def set_user_title(_, message):
     )
 
 
-@app.on_message(filters.command("set_chat_photo") & ~filters.private)
+@app.on_message(filters.command("setcphoto") & ~filters.private)
 @adminsOnly("can_change_info")
-async def set_chat_photo(_, message):
+async def setcphoto(_, message):
     reply = message.reply_to_message
 
     if not reply:

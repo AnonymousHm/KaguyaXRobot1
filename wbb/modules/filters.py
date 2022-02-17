@@ -51,7 +51,7 @@ Checkout /markdownhelp to know more about formattings and other syntax.
 async def save_filters(_, message):
     if len(message.command) < 2 or not message.reply_to_message:
         return await message.reply_text(
-            "**Usage:**\nReply to a text or sticker with /filter [FILTER_NAME] to save it."
+            "**Usage:**\nReply to a text or sticker with /filter Filter Name to save it."
         )
     if (
         not message.reply_to_message.text
@@ -63,7 +63,7 @@ async def save_filters(_, message):
     name = message.text.split(None, 1)[1].strip()
     if not name:
         return await message.reply_text(
-            "**Usage:**\n__/filter [FILTER_NAME]__"
+            "**Usage:**\n__/filter Filter Name"
         )
     chat_id = message.chat.id
     _type = "text" if message.reply_to_message.text else "sticker"
@@ -96,10 +96,10 @@ async def get_filterss(_, message):
 @adminsOnly("can_change_info")
 async def del_filter(_, message):
     if len(message.command) < 2:
-        return await message.reply_text("**Usage:**\n__/stop [FILTER_NAME]__")
+        return await message.reply_text("**Usage:**\n__/stop Filter Name")
     name = message.text.split(None, 1)[1].strip()
     if not name:
-        return await message.reply_text("**Usage:**\n__/stop [FILTER_NAME]__")
+        return await message.reply_text("**Usage:**\n__/stop Filter Name")
     chat_id = message.chat.id
     deleted = await delete_filter(chat_id, name)
     if deleted:

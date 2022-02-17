@@ -41,12 +41,12 @@ from wbb.utils.stickerset import (add_sticker_to_set, create_sticker,
 
 __MODULE__ = "Stickers"
 __HELP__ = """
-/sticker_id
+/stickerid
     To get FileID of a Sticker.
-/get_sticker
+/getsticker
     To get sticker as a photo and document.
-/kang
-    To kang a Sticker or an Image."""
+/rob
+    To steal a Sticker or an Image."""
 
 MAX_STICKERS = (
     120  # would be better if we could fetch this limit directly from telegram
@@ -54,9 +54,9 @@ MAX_STICKERS = (
 SUPPORTED_TYPES = ["jpeg", "png", "webp"]
 
 
-@app.on_message(filters.command("sticker_id") & ~filters.edited)
+@app.on_message(filters.command("stickerid") & ~filters.edited)
 @capture_err
-async def sticker_id(_, message: Message):
+async def stickerid(_, message: Message):
     reply = message.reply_to_message
 
     if not reply:
@@ -68,7 +68,7 @@ async def sticker_id(_, message: Message):
     await message.reply_text(f"`{reply.sticker.file_id}`")
 
 
-@app.on_message(filters.command("get_sticker") & ~filters.edited)
+@app.on_message(filters.command("getsticker") & ~filters.edited)
 @capture_err
 async def sticker_image(_, message: Message):
     r = message.reply_to_message
@@ -94,17 +94,17 @@ async def sticker_image(_, message: Message):
 
 
 @app2.on_message(
-    filters.command("kang", prefixes=USERBOT_PREFIX) & filters.user(SUDOERS),
+    filters.command("rob", prefixes=USERBOT_PREFIX) & filters.user(SUDOERS),
 )
 async def userbot_kang(_, message: Message):
     reply = message.reply_to_message
 
     if not reply:
-        return await message.reply_text("Reply to a sticker/image to kang it.")
+        return await message.reply_text("Reply to a sticker/image to rob it.")
 
     sticker_m = await reply.forward(BOT_USERNAME)
 
-    # Send /kang message to bot and listen to his reply concurrently
+    # Send /rob message to bot and listen to his reply concurrently
     bot_reply, kang_m_bot = await gather(
         app2.listen(BOT_USERNAME, filters=~filters.me),
         sticker_m.reply(message.text.replace(USERBOT_PREFIX, "/")),
@@ -125,14 +125,14 @@ async def userbot_kang(_, message: Message):
         await m.delete()
 
 
-@app.on_message(filters.command("kang") & ~filters.edited)
+@app.on_message(filters.command("rob") & ~filters.edited)
 @capture_err
-async def kang(client, message: Message):
+async def rob(client, message: Message):
     if not message.reply_to_message:
-        return await message.reply_text("Reply to a sticker/image to kang it.")
+        return await message.reply_text("Reply to a sticker/image to rob it.")
     if not message.from_user:
         return await message.reply_text(
-            "You are anon admin, kang stickers in my pm."
+            "You are anon admin, rob stickers in my pm."
         )
     msg = await message.reply_text("Kanging Sticker..")
 
@@ -184,7 +184,7 @@ async def kang(client, message: Message):
             if os.path.isfile(temp_file_path):
                 os.remove(temp_file_path)
         else:
-            return await msg.edit("Nope, can't kang that.")
+            return await msg.edit("Nope, can't rob that.")
     except ShortnameOccupyFailed:
         await message.reply_text("Change Your Name Or Username")
         return

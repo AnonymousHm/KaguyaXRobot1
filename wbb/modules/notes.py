@@ -36,11 +36,11 @@ from wbb.utils.functions import extract_text_and_keyb
 __MODULE__ = "Notes"
 __HELP__ = """/notes To Get All The Notes In The Chat.
 
-/save [NOTE_NAME] To Save A Note (Can be a sticker or text).
+/save Note_Name To Save A Note (Can be a sticker or text).
 
-#NOTE_NAME To Get A Note.
+#Note_Name To Get A Note.
 
-/delete [NOTE_NAME] To Delete A Note.
+/delete Note_Name To Delete A Note.
 
 Checkout /markdownhelp to know more about formattings and other syntax.
 """
@@ -55,7 +55,7 @@ async def save_notee(_, message):
     if len(message.command) < 2 or not message.reply_to_message:
         await eor(
             message,
-            text="**Usage:**\nReply to a text or sticker with /save [NOTE_NAME] to save it.",
+            text="**Usage:**\nReply to a text or sticker with /save Note_Name to save it.",
         )
 
     elif (
@@ -69,7 +69,7 @@ async def save_notee(_, message):
     else:
         name = message.text.split(None, 1)[1].strip()
         if not name:
-            return await eor(message, text="**Usage**\n__/save [NOTE_NAME]__")
+            return await eor(message, text="**Usage**\n__/save Note_Name__")
         _type = "text" if message.reply_to_message.text else "sticker"
         note = {
             "type": _type,
@@ -162,10 +162,10 @@ async def get_one_note(_, message):
 @adminsOnly("can_change_info")
 async def del_note(_, message):
     if len(message.command) < 2:
-        return await eor(message, text="**Usage**\n__/delete [NOTE_NAME]__")
+        return await eor(message, text="**Usage**\n__/delete Note_Name__")
     name = message.text.split(None, 1)[1].strip()
     if not name:
-        return await eor(message, text="**Usage**\n__/delete [NOTE_NAME]__")
+        return await eor(message, text="**Usage**\n__/delete Note_Name__")
 
     prefix = message.text.split()[0][0]
     is_ubot = bool(prefix == USERBOT_PREFIX)

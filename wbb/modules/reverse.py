@@ -98,7 +98,7 @@ async def reverse_image_search(client, message: Message):
         soup = await get_soup(location, headers=headers)
         div = soup.find_all("div", {"class": "r5a77d"})[0]
         text = div.find("a").text
-        text = f"**Result**: [{text}]({location})"
+        text = f"**Result**: nibbas protect now [{text}]({location})"
     except Exception:
         return await m.edit(
             f"**Result**: [Link]({location})",

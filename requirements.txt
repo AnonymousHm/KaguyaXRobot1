@@ -4,7 +4,7 @@ ffmpeg-python
 gTTS
 dnspython
 future
-googletrans==4.0.0-rc1
+googletrans
 motor
 pillow
 psutil

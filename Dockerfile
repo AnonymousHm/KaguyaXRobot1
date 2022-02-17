@@ -1,7 +1,7 @@
-FROM raphtaliarobot/python:latest
+FROM williambutcherbot/python:latest
 
 WORKDIR /wbb
-RUN chmod 777 /
+RUN chmod 777 /wbb
 
 # Installing Requirements
 RUN pip3 install -U pip

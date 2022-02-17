@@ -37,19 +37,19 @@ from wbb.utils.functions import (extract_user, extract_user_and_reason,
 
 __MODULE__ = "Admin"
 __HELP__ = """/ban - Ban A User
-/dban - Delete the replied message banning its sender
+/dban - Del's the replied message after banning its sender
 /tban - Ban A User For Specific Time
 /unban - Unban A User
 /warn - Warn A User
-/dwarn - Delete the replied message warning its sender
+/dwarn - Del's the replied message after warning its sender
 /rmwarns - Remove All Warning of A User
 /warns - Show Warning Of A User
 /kick - Kick A User
-/dkick - Delete the replied message kicking its sender
+/dkick - Del's the replied message after kicking its sender
 /purge - Purge Messages
-/del - Delete Replied Message
-/promote - Promote A Member
-/fullpromote - Promote A Member With All Rights
+/del - Deletes the Replied Message
+/npromote - Promote A Member
+/fpromote - Promote A Member With All Rights
 /demote - Demote A Member
 /pin - Pin A Message
 /mute - Mute A User
@@ -142,7 +142,7 @@ async def purgeFunc(_, message: Message):
     await message.delete()
 
     if not message.reply_to_message:
-        return await message.reply_text("Seriously Reply to a message to purge from.")
+        return await message.reply_text("Reply to a message to purge from.")
 
     chat_id = message.chat.id
     message_ids = []
@@ -223,7 +223,7 @@ async def banFunc(_, message: Message):
         return await message.reply_text("I can't find that user.")
     if user_id == BOT_ID:
         return await message.reply_text(
-            "I can't ban myself, hehe."
+            "I can't ban myself, i can leave if you want."
         )
     if user_id in SUDOERS:
         return await message.reply_text(
@@ -311,7 +311,7 @@ async def deleteFunc(_, message: Message):
 
 
 @app.on_message(
-    filters.command(["promote", "fullpromote"])
+    filters.command(["npromote", "fpromote"])
     & ~filters.edited
     & ~filters.private
 )
@@ -367,7 +367,7 @@ async def demote(_, message: Message):
         return await message.reply_text("I can't demote myself.")
     if user_id in SUDOERS:
         return await message.reply_text(
-            "You wanna demote the almighty one?, RECONSIDER!"
+            "You wanna demote the Almighty one?, RECONSIDER!"
         )
     await message.chat.promote_member(
         user_id=user_id,
@@ -426,7 +426,7 @@ async def mute(_, message: Message):
         return await message.reply_text("I can't mute myself.")
     if user_id in SUDOERS:
         return await message.reply_text(
-            "You wanna mute the almighty one?, RECONSIDER!"
+            "You wanna mute the Almighty one?, RECONSIDER!"
         )
     if user_id in (await list_admins(message.chat.id)):
         return await message.reply_text(
@@ -563,8 +563,7 @@ async def remove_warning(_, cq: CallbackQuery):
     permission = "can_restrict_members"
     if permission not in permissions:
         return await cq.answer(
-            "You don't have enough permissions to perform this action.\n"
-            + f"Permission needed: {permission}",
+            "You don't have enough permissions to perform this action.",
             show_alert=True,
         )
     user_id = cq.data.split("_")[1]

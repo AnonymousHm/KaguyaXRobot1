@@ -69,7 +69,7 @@ async def start_bot():
             bot_modules += "|{:<15}".format(i)
         j += 1
     print("+===============================================================+")
-    print("|                              RaphtaliaRoBot                              |")
+    print("|                          KaguyaXRobot                          |")
     print("+===============+===============+===============+===============+")
     print(bot_modules)
     print("+===============+===============+===============+===============+")
@@ -111,7 +111,7 @@ home_keyboard_pm = InlineKeyboardMarkup(
             ),
             InlineKeyboardButton(
                 text="Repo 🛠",
-                url="https://github.com/AnonymousHm/RaphtaliaRobot",
+                url="https://github.com/AnonymousHm/KaguyaXRobot",
             ),
         ],
         [
@@ -120,7 +120,7 @@ home_keyboard_pm = InlineKeyboardMarkup(
                 callback_data="stats_callback",
             ),
             InlineKeyboardButton(
-                text="Support 👨", url="http://t.me/RaphtaliaRobotSupportGrp"
+                text="Support 👨", url="http://t.me/KaguyaXRobotSupportGrp"
             ),
         ],
         [
@@ -148,7 +148,7 @@ keyboard = InlineKeyboardMarkup(
             ),
             InlineKeyboardButton(
                 text="Repo 🛠",
-                url="https://github.com/AnonymousHm/RaphtaliaRobot",
+                url="https://github.com/AnonymousHm/KaguyaXRobot",
             ),
         ],
         [
@@ -156,7 +156,7 @@ keyboard = InlineKeyboardMarkup(
                 text="System Stats 💻",
                 callback_data="stats_callback",
             ),
-            InlineKeyboardButton(text="Support", url="t.me/RaphtaliaRobotSupportGrp"),
+            InlineKeyboardButton(text="Support 👨", url="t.me/KaguyaXRobotSupportGrp"),
         ],
     ]
 )
@@ -295,7 +295,7 @@ async def help_button(client, query):
     create_match = re.match(r"help_create", query.data)
     top_text = f"""
 Hello {query.from_user.first_name}, My name is {BOT_NAME}.
-I'm a group management bot with some usefull features.
+I'm a group management bot with some usefule features.
 You can choose an option below, by clicking a button.
 Also you can ask anything in Support Group.
 

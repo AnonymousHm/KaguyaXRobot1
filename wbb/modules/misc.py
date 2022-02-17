@@ -48,7 +48,7 @@ __HELP__ = """
 /id
     Get Chat_ID or User_ID
 
-/random [Length]
+/random Length
     Generate Random Complex Passwords
 
 /cheat [Language] [Query]

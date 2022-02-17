@@ -37,25 +37,25 @@ from wbb import SUDOERS, WELCOME_DELAY_KICK_SEC, app
 from wbb.core.decorators.errors import capture_err
 from wbb.core.decorators.permissions import adminsOnly
 from wbb.core.keyboard import ikb
-from wbb.utils.dbfunctions import (captcha_off, captcha_on, del_welcome,
-                                   get_captcha_cache, get_welcome,
+from wbb.utils.dbfunctions import (captcha_off, captcha_on, delwelcome,
+                                   get_captcha_cache, getwelcome_msg,
                                    has_solved_captcha_once, is_captcha_on,
                                    is_gbanned_user, save_captcha_solved,
-                                   set_welcome, update_captcha_cache)
+                                   setwelcome, update_captcha_cache)
 from wbb.utils.filter_groups import welcome_captcha_group
 from wbb.utils.functions import extract_text_and_keyb, generate_captcha
 
 __MODULE__ = "Greetings"
 __HELP__ = """
-/captcha [ENABLE|DISABLE] - Enable/Disable captcha.
+/captcha Enable|Disable - Enable/Disable captcha.
 
-/set_welcome - Reply this to a message containing correct
+/setwelcome - Reply this to a message containing correct
 format for a welcome message, check end of this message.
 
-/del_welcome - Delete the welcome message.
-/get_welcome - Get the welcome message.
+/delwelcome - Delete the welcome message.
+/getwelcome_msg - Get the welcome message.
 
-**SET_WELCOME ->**
+**setwelcome ->**
 
 The format should be something like below.
 
@@ -202,7 +202,7 @@ async def welcome(_, message: Message):
 
 
 async def send_welcome_message(chat: Chat, user_id: int):
-    raw_text = await get_welcome(chat.id)
+    raw_text = await getwelcome_msg(chat.id)
 
     if not raw_text:
         return
@@ -354,9 +354,9 @@ async def captcha_state(_, message):
 # WELCOME MESSAGE
 
 
-@app.on_message(filters.command("set_welcome") & ~filters.private)
+@app.on_message(filters.command("setwelcome") & ~filters.private)
 @adminsOnly("can_change_info")
-async def set_welcome_func(_, message):
+async def setwelcome_func(_, message):
     usage = "You need to reply to a text, check the Greetings module in /help"
     if not message.reply_to_message:
         await message.reply_text(usage)
@@ -368,23 +368,23 @@ async def set_welcome_func(_, message):
     raw_text = message.reply_to_message.text.markdown
     if not (extract_text_and_keyb(ikb, raw_text)):
         return await message.reply_text("Wrong formating, check help section.")
-    await set_welcome(chat_id, raw_text)
+    await setwelcome(chat_id, raw_text)
     await message.reply_text("Welcome message has been successfully set.")
 
 
-@app.on_message(filters.command("del_welcome") & ~filters.private)
+@app.on_message(filters.command("delwelcome") & ~filters.private)
 @adminsOnly("can_change_info")
-async def del_welcome_func(_, message):
+async def delwelcome_func(_, message):
     chat_id = message.chat.id
-    await del_welcome(chat_id)
+    await delwelcome(chat_id)
     await message.reply_text("Welcome message has been deleted.")
 
 
-@app.on_message(filters.command("get_welcome") & ~filters.private)
+@app.on_message(filters.command("getwelcome_msg") & ~filters.private)
 @adminsOnly("can_change_info")
-async def get_welcome_func(_, message):
+async def getwelcome_msg_func(_, message):
     chat = message.chat
-    welcome = await get_welcome(chat.id)
+    welcome = await getwelcome_msg(chat.id)
     if not welcome:
         return await message.reply_text("No welcome message set.")
     if not message.from_user:
