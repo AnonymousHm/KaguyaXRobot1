@@ -1,7 +1,7 @@
 {
-    "name": "WilliamButcherBot",
+    "name": "KaguyaXShinomiyaRobot",
     "description": "Telegram Group Management Bot Written In Python Using Pyrogram.",
-    "repository": "https://github.com/TheHamkerCat/WilliamButcherBot",
+    "repository": "https://github.com/AnonymousHm/KaguyaXRobot",
     "logo": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg",
     "keywords": [
     "python3",
@@ -11,7 +11,7 @@
     "telegram-bot",
     "pyrogram"
     ],
-    "repository": "https://github.com/TheHamkerCat/WilliamButcherBot",
+    "repository": "https://github.com/AnonymousHm/KaguyaXRobot",
     "stack": "container",
     "env": {
         "BOT_TOKEN": {
@@ -47,7 +47,7 @@
             "required": true
         },
         "MONGO_URL": {
-            "description": "Get From Here. https://telegra.ph/How-To-get-Mongodb-URI-04-06",
+            "description": "Required",
             "required": true
         },
         "ARQ_API_URL": {
