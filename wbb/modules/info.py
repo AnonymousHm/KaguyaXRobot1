@@ -33,7 +33,7 @@ from wbb.utils.dbfunctions import is_gbanned_user, user_global_karma
 __MODULE__ = "Info"
 __HELP__ = """
 /info Usename|ID - Get info about a user.
-/chatinfo Usename|ID - Get info about a chat.
+/chat_info Usename|ID - Get info about a chat.
 """
 
 
@@ -65,7 +65,7 @@ async def get_user_info(user, already=False):
     return [caption, photo_id]
 
 
-async def get_chatinfo(chat, already=False):
+async def get_chat_info(chat, already=False):
     if not already:
         chat = await app.get_chat(chat)
     chat_id = chat.id
@@ -120,12 +120,12 @@ async def info_func(_, message: Message):
     os.remove(photo)
 
 
-@app.on_message(filters.command("chatinfo"))
-async def chatinfo_func(_, message: Message):
+@app.on_message(filters.command("chat_info"))
+async def chat_info_func(_, message: Message):
     try:
         if len(message.command) > 2:
             return await message.reply_text(
-                "**Usage:**/chatinfo Usename|ID"
+                "**Usage:**/chat_info Usename|ID"
             )
 
         if len(message.command) == 1:
@@ -135,7 +135,7 @@ async def chatinfo_func(_, message: Message):
 
         m = await message.reply_text("Processing")
 
-        info_caption, photo_id = await get_chatinfo(chat)
+        info_caption, photo_id = await get_chat_info(chat)
         if not photo_id:
             return await m.edit(info_caption, disable_web_page_preview=True)
 
