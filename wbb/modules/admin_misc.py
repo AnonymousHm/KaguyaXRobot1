@@ -1,18 +1,14 @@
 """
 MIT License
-
 Copyright (c) 2021 TheHamkerCat
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
-
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,17 +26,17 @@ from wbb.core.decorators.permissions import adminsOnly
 
 __MODULE__ = "Admin Miscs"
 __HELP__ = """
-/setctitle - Change The Name Of A Group/Channel.
-/setcphoto - Change The PFP Of A Group/Channel.
-/setusertitle - Change The Administrator Title Of An Admin.
+/set_chat_title - Change The Name Of A Group/Channel.
+/set_chat_photo - Change The PFP Of A Group/Channel.
+/set_user_title - Change The Administrator Title Of An Admin.
 """
 
 
-@app.on_message(filters.command("setctitle") & ~filters.private)
+@app.on_message(filters.command("set_chat_title") & ~filters.private)
 @adminsOnly("can_change_info")
-async def setctitle(_, message):
+async def set_chat_title(_, message):
     if len(message.command) < 2:
-        return await message.reply_text("**Usage:**\n/setctitle NEW NAME")
+        return await message.reply_text("**Usage:**\n/set_chat_title NEW NAME")
     old_title = message.chat.title
     new_title = message.text.split(None, 1)[1]
     await message.chat.set_title(new_title)
@@ -49,9 +45,9 @@ async def setctitle(_, message):
     )
 
 
-@app.on_message(filters.command("setcphoto") & ~filters.private)
+@app.on_message(filters.command("set_user_title") & ~filters.private)
 @adminsOnly("can_change_info")
-async def setusertitle(_, message):
+async def set_user_title(_, message):
     if not message.reply_to_message:
         return await message.reply_text(
             "Reply to user's message to set his admin title"
@@ -64,7 +60,7 @@ async def setusertitle(_, message):
     from_user = message.reply_to_message.from_user
     if len(message.command) < 2:
         return await message.reply_text(
-            "**Usage:**\n/setusertitle NEW ADMINISTRATOR TITLE"
+            "**Usage:**\n/set_user_title NEW ADMINISTRATOR TITLE"
         )
     title = message.text.split(None, 1)[1]
     await app.set_administrator_title(chat_id, from_user.id, title)
@@ -73,9 +69,9 @@ async def setusertitle(_, message):
     )
 
 
-@app.on_message(filters.command("setcphoto") & ~filters.private)
+@app.on_message(filters.command("set_chat_photo") & ~filters.private)
 @adminsOnly("can_change_info")
-async def setcphoto(_, message):
+async def set_chat_photo(_, message):
     reply = message.reply_to_message
 
     if not reply:
