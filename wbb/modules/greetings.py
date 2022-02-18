@@ -202,7 +202,7 @@ async def welcome(_, message: Message):
 
 
 async def send_welcome_message(chat: Chat, user_id: int):
-    raw_text = await getwelcome_msg(chat.id)
+    raw_text = await get_welcome(chat.id)
 
     if not raw_text:
         return
@@ -380,11 +380,11 @@ async def del_welcome_func(_, message):
     await message.reply_text("Welcome message has been deleted.")
 
 
-@app.on_message(filters.command("getwelcome_msg") & ~filters.private)
+@app.on_message(filters.command("getwelcome") & ~filters.private)
 @adminsOnly("can_change_info")
-async def getwelcome_msg_func(_, message):
+async def get_welcome_func(_, message):
     chat = message.chat
-    welcome = await getwelcome_msg(chat.id)
+    welcome = await get_welcome(chat.id)
     if not welcome:
         return await message.reply_text("No welcome message set.")
     if not message.from_user:
