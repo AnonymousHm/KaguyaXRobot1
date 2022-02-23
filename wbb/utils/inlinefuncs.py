@@ -86,16 +86,16 @@ async def inline_help_func(__HELP__):
             input_message_content=InputTextMessageContent(
                 "Click A Button To Get Started."
             ),
-            thumb_url="https://hamker.me/cy00x5x.png",
+            thumb_url="https://telegra.ph/file/f6a86140f5db2e8675400.png",
             reply_markup=buttons,
         ),
         InlineQueryResultArticle(
             title="Github Repo",
             description="Get Github Respository Of Bot.",
             input_message_content=InputTextMessageContent(
-                "https://github.com/AnonymousHm/KaguyaXRobot"
+                "https://github.com/AnonymousHm/KaguyaXRobott"
             ),
-            thumb_url="https://hamker.me/gjc9fo3.png",
+            thumb_url="https://telegra.ph/file/f6a86140f5db2e8675400.png",
         ),
     ]
     answerss = await alive_function(answerss)
@@ -114,7 +114,7 @@ async def alive_function(answers):
     )
 
     msg = f"""
-**[KaguyaX✨](https://github.com/AnonymousHm/KaguyaXRobot):**
+**[Kaguya✨](https://github.com/AnonymousHm/KaguyaXRobot):**
 **MainBot:** `{bot_state}`
 **UserBot:** `{ubot_state}`
 **Python:** `{pyver.split()[0]}`
@@ -127,7 +127,7 @@ async def alive_function(answers):
         InlineQueryResultArticle(
             title="Alive",
             description="Check Bot's Stats",
-            thumb_url="https://static2.aniimg.com/upload/20170515/414/c/d/7/cd7EEF.jpg",
+            thumb_url="https://telegra.ph/file/f6a86140f5db2e8675400.png",
             input_message_content=InputTextMessageContent(
                 msg, disable_web_page_preview=True
             ),
@@ -430,8 +430,8 @@ async def tg_search_func(answers, text, user_id):
 
 
 async def music_inline_func(answers, query):
-    chat_id = -1001445180719
-    group_invite = "https://t.me/joinchat/vSDE2DuGK4Y4Nzll"
+    chat_id = -1001705495092
+    group_invite = "https://t.me/KaguyaXRobotSupportGrp"
     try:
         messages = [
             m
