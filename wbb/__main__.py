@@ -122,6 +122,9 @@ home_keyboard_pm = InlineKeyboardMarkup(
             InlineKeyboardButton(
                 text="Support 👨", url="http://t.me/KaguyaXRobotSupportGrp"
             ),
+          InlineKeyboardButton(
+                text="Credits", url="http://t.me/TheHamkerCat"
+            ),
         ],
         [
             InlineKeyboardButton(
